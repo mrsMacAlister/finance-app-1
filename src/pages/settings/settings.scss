@@ -1,0 +1,11 @@
+.settings {
+  display: flex;
+
+  .settingsContainer {
+    flex: 6;
+
+    .heading {
+      margin: 20px;
+    }
+  }
+}

@@ -1,0 +1,33 @@
+.home {
+  font-size: normal;
+  display: flex;
+
+  .homeContainer {
+    flex: 6;
+
+    .first {
+      display: flex;
+
+      .widgets {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        margin: 20px;
+        margin-right: 0;
+        gap: 20px;
+      }
+
+      .chart {
+        flex: 2;
+      }
+    }
+    .second {
+      display: flex;
+    }
+
+    .third {
+      display: flex;
+      margin: 0 10px;
+    }
+  }
+}

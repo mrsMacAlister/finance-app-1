@@ -1,0 +1,58 @@
+.login {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .intro {
+    max-width: 600px;
+
+    h2 {
+      margin: 20px;
+    }
+
+    h2,
+    p {
+      text-align: center;
+    }
+
+    .account {
+      margin: 20px;
+    }
+  }
+
+  .forms {
+    display: flex;
+
+    form {
+      margin: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      input {
+        width: 200px;
+        height: 30px;
+        margin: 10px;
+      }
+
+      button {
+        width: 208px;
+        height: 30px;
+        margin: 10px;
+        border: none;
+        border-radius: 4px;
+        background-color: purple;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      span {
+        font-size: 12px;
+        color: red;
+      }
+    }
+  }
+}

@@ -1,0 +1,74 @@
+.calendarW {
+  flex: 1;
+  margin: 0 20px 20px 20px;
+  padding: 20px;
+  border-radius: 10px;
+  -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+
+  .top {
+    display: flex;
+    justify-content: center;
+
+    .title {
+      font-size: 15px;
+      font-weight: bold;
+    }
+  }
+
+  .bottom {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .dates-list {
+      margin-top: 20px;
+      font-size: 14px;
+      max-height: 319px;
+      overflow-y: scroll;
+      .items {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 10px 0;
+        .item {
+          display: flex;
+          align-items: center;
+          .item-date {
+            min-width: fit-content;
+            margin-right: 8px;
+          }
+        }
+        .delete-button {
+          display: flex;
+          align-items: center;
+        }
+
+        .delete-button:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+    form {
+      font-size: 14px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 0 10px 0;
+
+      input {
+        margin: 10px 5px 10px 0;
+      }
+      button {
+        margin: 0;
+        padding: 1px 5px;
+      }
+
+      button:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
