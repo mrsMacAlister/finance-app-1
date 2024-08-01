@@ -109,13 +109,13 @@ const Sidebar = () => {
         </div>
         <div className="bottom">
           <hr />
-          <div className="notice">
+          {/*<div className="notice">
             <p>
               Some features are currently unavailable.
               <br />
               The code is being upgraded.
             </p>
-          </div>
+          </div>*/}
           {/* <div className="colors">
           <div className="colorOption"></div>
           <div className="colorOption"></div>
