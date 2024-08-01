@@ -1,4 +1,4 @@
-(This app is a work in progress)
+(This app is a work in progress, workflow of the original app can be seen on https://github.com/mrsMacAlister/finance-app)
 
 ## Personal Finance Web Application
 
