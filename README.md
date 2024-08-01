@@ -7,4 +7,4 @@ It is built in **React**, styled with **Sass**, and **Firebase** is used for aut
 
 *Additional features and code optimization are yet to follow.*
 
-Try out the app here: https://papaya-dieffenbachia-be3824.netlify.app
+Try out the app here: https://finance-app-1.netlify.app/
