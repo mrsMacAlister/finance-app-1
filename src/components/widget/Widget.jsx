@@ -46,59 +46,55 @@ const Widget = ({ type }) => {
 
   useEffect(() => {
     const unsub = auth.onAuthStateChanged(async (authUser) => {
-      unsub();
       if (authUser) {
+        const userID = authUser.uid;
         try {
-          const userID = authUser.uid;
           const fetchData = async () => {
-            let outcomeList = [];
-            let incomeList = [];
+            const outcomeList = [];
+            const incomeList = [];
 
-            const outcomeQuery = query(
+            // Query for all documents within the date range
+            const expensesQuery = query(
               collection(db, `${userID}expenses`),
-              where("outcome", "!=", null)
-              /*where("day", "array-contains", "2024")*/
-              /*in "AddExpense"/"AddIncome" save separately year and month to call that data out here*/
+              where("day", "<=", "2024-12-31"),
+              where("day", ">", "2024-11-30")
+            );
+            const expensesSnapshot = await getDocs(expensesQuery);
+
+            // Filter results locally for non-null outcome and income
+            expensesSnapshot.forEach((doc) => {
+              const data = doc.data();
+              if (data.outcome != null) {
+                outcomeList.push(parseFloat(data.outcome, 10));
+              }
+              if (data.income != null) {
+                incomeList.push(parseFloat(data.income, 10));
+              }
+            });
+
+            // Calculate total outcome and income
+            const totalOutcome = outcomeList.reduce(
+              (total, item) => total + item,
+              0
+            );
+            const totalIncome = incomeList.reduce(
+              (total, item) => total + item,
+              0
             );
 
-            const outcomeQ = await getDocs(outcomeQuery);
-
-            outcomeQ.forEach((doc) => {
-              const outc = { outcome: doc.data().outcome };
-              outcomeList.push(parseFloat(outc.outcome, 10));
-            });
-            //console.log("outcome list", outcomeList);
-            const totalOutcome = outcomeList.reduce((total, item) => {
-              return total + item;
-            }, 0);
-
-            //console.log("Total OUTCOME", totalOutcome);
+            // Update state
             setOutcome(totalOutcome);
-
-            const incomeQuery = query(
-              collection(db, `${userID}expenses`),
-              where("income", "!=", null)
-            );
-
-            const incomeQ = await getDocs(incomeQuery);
-
-            incomeQ.forEach((doc) => {
-              const inc = { income: doc.data().income };
-              incomeList.push(parseFloat(inc.income, 10));
-            });
-            //console.log("outcome list", outcomeList);
-            const totalIncome = incomeList.reduce((total, item) => {
-              return total + item;
-            }, 0);
-            //console.log("Total INCOME", totalIncome);
             setIncome(totalIncome);
           };
-          fetchData();
+
+          await fetchData();
         } catch (err) {
-          console.log(err);
+          console.error("Error fetching data:", err);
         }
       }
     });
+
+    return () => unsub(); // Clean up listener
   }, []);
 
   return (
