@@ -56,8 +56,8 @@ const Widget = ({ type }) => {
             // Query for all documents within the date range
             const expensesQuery = query(
               collection(db, `${userID}expenses`),
-              where("day", "<=", "2024-12-31"),
-              where("day", ">", "2024-11-30")
+              where("day", "<=", "2025-01-31"),
+              where("day", ">", "2024-12-31")
             );
             const expensesSnapshot = await getDocs(expensesQuery);
 

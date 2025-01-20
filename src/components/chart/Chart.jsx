@@ -125,47 +125,12 @@ const Chart = ({ aspect }) => {
           }
 */
           try {
-            let julDoc = [];
             let augDoc = [];
             let septDoc = [];
             let octDoc = [];
             let novDoc = [];
             let decDoc = [];
-
-            //jul
-            const julQuery = await getDocs(
-              query(
-                collection(db, `${userID}expenses`),
-                where("day", "<=", "2024-07-31"),
-                where("day", ">", "2024-06-30")
-              )
-            );
-            julQuery.forEach((doc) => {
-              const outcm = doc.data().outcome;
-              const incm = doc.data().income;
-              julDoc.push({
-                outcome: Number(outcm),
-                income: Number(incm),
-              });
-            });
-            const julResults = julDoc.reduce(
-              (total, amount) => {
-                if (amount.outcome != null) {
-                  return (total = {
-                    outcome: total.outcome + amount.outcome,
-                    income: total.income + amount.income,
-                    id: uuidv4(),
-                    Month: "Jul",
-                  });
-                }
-                return total;
-              },
-              { outcome: 0, income: 0, id: uuidv4(), Month: "Jul" }
-            );
-            const julDt = {
-              ...julResults,
-              Balance: julResults.income - julResults.outcome,
-            };
+            let janDoc = [];
 
             //aug
             const augQuery = await getDocs(
@@ -344,14 +309,48 @@ const Chart = ({ aspect }) => {
               },
               { outcome: 0, income: 0, id: uuidv4(), Month: "Dec" }
             );
-            // console.log("jun results", junResults);
+
             const decDt = {
               ...decResults,
               Balance: decResults.income - decResults.outcome,
             };
 
+            //jan
+            const janQuery = await getDocs(
+              query(
+                collection(db, `${userID}expenses`),
+                where("day", "<=", "2025-01-31"),
+                where("day", ">", "2024-12-31")
+              )
+            );
+            janQuery.forEach((doc) => {
+              const outcm = doc.data().outcome;
+              const incm = doc.data().income;
+              janDoc.push({
+                outcome: Number(outcm),
+                income: Number(incm),
+              });
+            });
+            const janResults = janDoc.reduce(
+              (total, amount) => {
+                if (amount.outcome != null) {
+                  return (total = {
+                    outcome: total.outcome + amount.outcome,
+                    income: total.income + amount.income,
+                    id: uuidv4(),
+                    Month: "Jan",
+                  });
+                }
+                return total;
+              },
+              { outcome: 0, income: 0, id: uuidv4(), Month: "Jan" }
+            );
+            const janDt = {
+              ...janResults,
+              Balance: janResults.income - janResults.outcome,
+            };
             //
-            setDatas([julDt, augDt, septDt, octDt, novDt, decDt]);
+            setDatas([augDt, septDt, octDt, novDt, decDt, janDt]);
           } catch (err) {
             console.log(err);
           }
